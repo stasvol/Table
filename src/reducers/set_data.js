@@ -1,13 +1,15 @@
-const Set_data = 'Set_data'
+const SET_DATA = 'SET_DATA'
 
 
-const initialState ={}
+const initialState ={
+    data:[]
+}
 
 
 export const setDataRedux = (state=initialState,action) =>{
 
     switch (action.type) {
-        case Set_data:
+        case SET_DATA:
 
             return{
                data: action.payload
@@ -17,4 +19,4 @@ export const setDataRedux = (state=initialState,action) =>{
             return state;
     }
 }
-export const setDataAC = (data) =>({type:Set_data,payload:data})
+export const setDataAC = (data) =>({type:SET_DATA,payload:data})
