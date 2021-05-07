@@ -1,14 +1,31 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Table } from 'reactstrap';
 import  style from './../module.css/module.css'
 import PaginationTable from "../pagination/pagination";
 import TableTwo from "./table2";
+import {asyncDataThunk} from "../Api/api"
+import {dataFetch, setDataAC} from "../reducers/set_data";
+import {useDispatch} from "react-redux";
 
-const DataTable =(props)=> {
-
-        return (
+const DataTable =({...props})=> {
+    console.log(props)
+    return (
             <div>
+                { props.data && props.data.length !==0 &&
+                props.data.financials.map((data,index)=> <div><span>EBITDA:{data.EBITDA}</span>
+                     <span>accountsPayable:{data.accountsPayable}</span>
+                     <span>capitalSurplus:{data.capitalSurplus}</span>
+                     <span>cashChange:{data.cashChange}</span>
+                     <span>cashChange:{data.cashChange}</span>
+                     <span>cashFlow:{data.cashFlow}</span>
+                     <span>currency:{data.currency}</span>
+                     <span>fiscalDate:{data.fiscalDate}</span>
+
+                    </div>
+                   )
+                }
             <Table className={style.tab} striped bordered hover >
+
                 <thead>
                 <tr>
                     <th>#</th>
@@ -93,7 +110,7 @@ const DataTable =(props)=> {
             </Table>
 
        <PaginationTable/>
-                <TableTwo/>
+                {/*<TableTwo/>*/}
             </div>
         );
 

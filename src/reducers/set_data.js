@@ -1,5 +1,5 @@
 const SET_DATA = 'SET_DATA'
-
+const DATA_FETCH ='DATA_FETCH'
 
 const initialState ={
     data:[]
@@ -20,3 +20,4 @@ export const setDataRedux = (state=initialState,action) =>{
     }
 }
 export const setDataAC = (data) =>({type:SET_DATA,payload:data})
+// export const dataFetch = (data) =>({type:DATA_FETCH,data})

@@ -51,10 +51,16 @@ export const URL = `${BASE_PATH}${ENDPOINT_PATH}${STOCKS_COUNT}?${QUERY_PARAM}${
 // }
 // console.log(getData)
 
-export const asyncDataThunk = ()=>(dispatch) => {
+export const asyncDataThunk = (data)=>(dispatch) => {
 
-    fetch(`${BASE_PATH}${ENDPOINT_PATH}${STOCKS_COUNT}?${QUERY_PARAM}${API_KEY}`)
+    fetch( URL )
+        .then(response=> {
+            if (!response.ok){
+                 throw new Error(response.statusText)
+            }
+            return response
+        })
         .then(response => response.json())
-        .then(json => dispatch(setDataAC(json)))
+        .then(data => dispatch(setDataAC(data)))
 
 }

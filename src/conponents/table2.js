@@ -4,9 +4,12 @@ import style from "../module.css/module.css";
 import PaginationTable from "../pagination/pagination";
 
 const TableTwo =(props)=> {
+
     return(
         <div >
             <Table className={style.tab} striped bordered hover >
+
+
                 <thead>
                 <tr>
                     <th>#</th>

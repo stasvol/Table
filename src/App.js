@@ -2,25 +2,33 @@ import logo from './logo.svg';
 import './App.css';
 import {Button} from "reactstrap";
 import axios from "axios";
-import {setDataAC} from "./reducers/set_data";
+import {dataFetch, setDataAC} from "./reducers/set_data";
 import {useDispatch, useSelector} from "react-redux";
 import {asyncThunk} from "./asyncAction/asyncThunk";
 import {asyncDataThunk} from "./Api/api";
 import DataTable from "./conponents/data_table";
 import TableTwo from "./conponents/table2";
+import {useEffect} from "react";
 
-function App() {
+function App (props) {
     const dispatch = useDispatch()
-    const data = useSelector(state => state.data)
+    const data = useSelector(state => state.data.data)
     const users = useSelector(state=>state.users)
+    // const dataFetch = dispatch(asyncDataThunk())
 
-  return (
+    useEffect(() =>{
+           dispatch(asyncDataThunk())
+            // dataFetch(data)
+    },[])
+
+    console.log(data)
+    return (
     <div className="App">
 
       <h1>Hello World</h1>
         <div>
             <Button onClick={()=> dispatch(asyncThunk())} color="primary">USERS</Button>{' '}
-            <Button onClick={()=> dispatch(asyncDataThunk())} color="secondary">secondary</Button>{' '}
+            {/*<Button onClick={()=> dispatch(asyncDataThunk())} color="secondary">secondary</Button>{' '}*/}
             {/*<Button color="success">success</Button>{' '}*/}
             {/*<Button color="info">info</Button>{' '}*/}
             {/*<Button color="warning">warning</Button>{' '}*/}
@@ -36,7 +44,7 @@ function App() {
                   )
             }
         </div>
-        <DataTable/>
+        <DataTable data={data} />
 
         {/*<TableTwo/>*/}
     </div>
