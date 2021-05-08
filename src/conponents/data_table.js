@@ -11,20 +11,33 @@ const DataTable =({...props})=> {
     console.log(props)
     return (
             <div>
+                {/*{ props.data && props.data.length !==0 &&*/}
+                {/*props.data.financials.map((data,index)=> <div><span>EBITDA:{data.EBITDA}</span>*/}
+                {/*     <span>accountsPayable:{data.accountsPayable}</span>*/}
+                {/*     <span>capitalSurplus:{data.capitalSurplus}</span>*/}
+                {/*     <span>cashChange:{data.cashChange}</span>*/}
+                {/*     <span>cashChange:{data.cashChange}</span>*/}
+                {/*     <span>cashFlow:{data.cashFlow}</span>*/}
+                {/*     <span>currency:{data.currency}</span>*/}
+                {/*     <span>fiscalDate:{data.fiscalDate}</span>*/}
+
+                {/*    </div>*/}
+                {/*   )*/}
+                {/*}*/}
+            <Table className={style.tab} striped bordered hover >
                 { props.data && props.data.length !==0 &&
                 props.data.financials.map((data,index)=> <div><span>EBITDA:{data.EBITDA}</span>
-                     <span>accountsPayable:{data.accountsPayable}</span>
-                     <span>capitalSurplus:{data.capitalSurplus}</span>
-                     <span>cashChange:{data.cashChange}</span>
-                     <span>cashChange:{data.cashChange}</span>
-                     <span>cashFlow:{data.cashFlow}</span>
-                     <span>currency:{data.currency}</span>
-                     <span>fiscalDate:{data.fiscalDate}</span>
+                        {/*<span>accountsPayable:{data.accountsPayable}</span>*/}
+                        {/*<span>capitalSurplus:{data.capitalSurplus}</span>*/}
+                        {/*<span>cashChange:{data.cashChange}</span>*/}
+                        {/*<span>cashChange:{data.cashChange}</span>*/}
+                        {/*<span>cashFlow:{data.cashFlow}</span>*/}
+                        {/*<span>currency:{data.currency}</span>*/}
+                        {/*<span>fiscalDate:{data.fiscalDate}</span>*/}
 
                     </div>
-                   )
+                )
                 }
-            <Table className={style.tab} striped bordered hover >
 
                 <thead>
                 <tr>
