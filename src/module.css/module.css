@@ -2,9 +2,23 @@
 .table{
     max-width: 80%;
     margin-left: 10%;
-    cursor: pointer;
+    /*cursor: pointer;*/
     margin-top: 20px;
+
+
+    background: linear-gradient(
+           to top,
+           white ,
+         #e7e7e7 50%,
+         white 50%,
+           white
+          /*#eeebeb*/
+    );
+    /* Прямоугольник, в котором нужно повторить.*/
+    /*    В этом случае он может быть полностью широким.*/
+    background-size: 100% 15%;
 }
+
 .pagination {
     display: flex;
      /*padding-left: 0;*/
@@ -23,3 +37,4 @@
 .page-item.disabled {
     cursor: not-allowed ;
 }
+

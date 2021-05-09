@@ -25,9 +25,9 @@ function App (props) {
     return (
     <div className="App">
 
-      <h1>Hello World</h1>
+
         <div>
-            <Button onClick={()=> dispatch(asyncThunk())} color="primary">USERS</Button>{' '}
+            {/*<Button onClick={()=> dispatch(asyncThunk())} color="primary">USERS</Button>{' '}*/}
             {/*<Button onClick={()=> dispatch(asyncDataThunk())} color="secondary">secondary</Button>{' '}*/}
             {/*<Button color="success">success</Button>{' '}*/}
             {/*<Button color="info">info</Button>{' '}*/}

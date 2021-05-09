@@ -64,6 +64,7 @@ export const asyncDataThunk = (data)=>(dispatch) => {
         })
         .then(response => response.json())
         .then(data => dispatch(setDataAC(data)))
+
         .catch(err => console.error(err))
 
 }
