@@ -125,31 +125,39 @@ class PaginationTable extends React.PureComponent {
                 <Pagination aria-label="Page navigation example">
 
                     <PaginationItem disabled={currentPage <= 0}>
+                        <PaginationLink first onClick={e => this.handleClick(e, currentPage - 1)}  />
+                    </PaginationItem>
+
+                    <PaginationItem disabled={currentPage <= 0}>
 
                         <PaginationLink
                             onClick={e => this.handleClick(e, currentPage - 1)}
                             previous
-                            href="#"
-                        />
 
+                        />
                     </PaginationItem>
 
                     {[...Array(this.pagesCount)].map((page, i) =>
                         <PaginationItem active={i === currentPage} key={i}>
-                            <PaginationLink onClick={e => this.handleClick(e, i)} href="#">
+                            <PaginationLink onClick={e => this.handleClick(e, i)} >
                                 {i + 1}
                             </PaginationLink>
                         </PaginationItem>
                     )}
 
                     <PaginationItem disabled={currentPage >= this.pagesCount - 1}>
-
                         <PaginationLink
                             onClick={e => this.handleClick(e, currentPage + 1)}
                             next
-                            href="#"
-                        />
 
+                        />
+                    </PaginationItem>
+                    <PaginationItem disabled={currentPage >= this.pagesCount - 1}>
+                        <PaginationLink
+                            onClick={e => this.handleClick(e, currentPage + 1)}
+                            last
+
+                        />
                     </PaginationItem>
 
                 </Pagination>
