@@ -6,22 +6,28 @@ import {dataFetch, setDataAC} from "./reducers/set_data";
 import {useDispatch, useSelector} from "react-redux";
 import {asyncThunk} from "./asyncAction/asyncThunk";
 import {asyncDataThunk} from "./Api/api";
-import DataTable from "./conponents/data_table";
-import TableTwo from "./conponents/table2";
-import {useEffect} from "react";
+import DataTable from "./components/data_table";
+import React, {useEffect} from "react";
+import TestTable from "./components/testTable";
+import PaginationTable from "./pagination/pagination1";
+
+
+
 
 function App (props) {
     const dispatch = useDispatch()
     const data = useSelector(state => state.data.data)
     const users = useSelector(state=>state.users)
+    const pages = useSelector(state=>state.pages)
     // const dataFetch = dispatch(asyncDataThunk())
+    //  console.log(pages)
 
     useEffect(() =>{
            dispatch(asyncDataThunk())
             // dataFetch(data)
     },[])
 
-    console.log(data)
+
     return (
     <div className="App">
 
@@ -44,9 +50,10 @@ function App (props) {
                   )
             }
         </div>
-        <DataTable data={data} />
-
+        <DataTable data={data} pages={pages} {...props}/>
+         {/*<PaginationTable/>*/}
         {/*<TableTwo/>*/}
+       {/*<TestTable/>*/}
     </div>
   );
 }

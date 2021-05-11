@@ -2,7 +2,8 @@ const SET_DATA = 'SET_DATA'
 const DATA_FETCH ='DATA_FETCH'
 
 const initialState ={
-    data:[]
+    data:[],
+    tableSize: 10,
 }
 
 
@@ -12,7 +13,8 @@ export const setDataRedux = (state=initialState,action) =>{
         case SET_DATA:
 
             return{
-               data: action.payload
+                data: action.payload,
+
             }
 
         default:
