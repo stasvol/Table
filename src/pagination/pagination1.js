@@ -16,11 +16,11 @@ class PaginationTable extends React.PureComponent {
 
 
 
-              this.pageSize = 10;
+              this.pageSize = 4;
 
-           if (this.props.data && this.props.data.length !== 0 ) {
+           if (this.props.data.financials && this.props.data.financials.length !== 0 ) {
 
-               this.pagesCount = Math.ceil(this.props.data.financials?.length / this.props.pages.pageSize);
+               this.pagesCount = Math.ceil(this.props.data.financials.length / this.props.pages.pageSize);
            }
 
            this.state = {
@@ -95,17 +95,12 @@ class PaginationTable extends React.PureComponent {
                     </tr>
                     </thead>
 
-                {this.props.data  && this.props.data.length !== 0  &&
+                {this.props.data.financials  && this.props.data.financials.length !== 0  &&
                     (this.props.data.financials )
                     .slice(
                         currentPage * this.pageSize,
                         (currentPage + 1) * this.pageSize
                     )
-                    // .map((data, i) =>
-                    //     <div className="data-slice" key={i}>
-                    //         {data}
-                    //     </div>
-                    // )}
 
                     .map((data, i) =>
 
@@ -125,7 +120,7 @@ class PaginationTable extends React.PureComponent {
                 <Pagination aria-label="Page navigation example">
 
                     <PaginationItem disabled={currentPage <= 0}>
-                        <PaginationLink first onClick={e => this.handleClick(e, currentPage - 1)}  />
+                        <PaginationLink first onClick={e => this.handleClick(e, currentPage===0)}  />
                     </PaginationItem>
 
                     <PaginationItem disabled={currentPage <= 0}>
@@ -140,21 +135,19 @@ class PaginationTable extends React.PureComponent {
                     {[...Array(this.pagesCount)].map((page, i) =>
                         <PaginationItem active={i === currentPage} key={i}>
                             <PaginationLink onClick={e => this.handleClick(e, i)} >
-                                {i + 1}
+                                { i+1 }
                             </PaginationLink>
                         </PaginationItem>
                     )}
 
-                    <PaginationItem disabled={currentPage >= this.pagesCount - 1}>
+                    <PaginationItem disabled={currentPage >= this.pagesCount + 1}>
                         <PaginationLink
                             onClick={e => this.handleClick(e, currentPage + 1)}
-                            next
-
-                        />
+                            next />
                     </PaginationItem>
-                    <PaginationItem disabled={currentPage >= this.pagesCount - 1}>
+                    <PaginationItem disabled={currentPage >= this.pagesCount + 1}>
                         <PaginationLink
-                            onClick={e => this.handleClick(e, currentPage + 1)}
+                            onClick={e => this.handleClick(e,   this.pagesCount+1)}
                             last
 
                         />
