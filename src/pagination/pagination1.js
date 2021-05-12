@@ -16,7 +16,7 @@ class PaginationTable extends React.PureComponent {
 
 
 
-              this.pageSize = 4;
+              this.pageSize = 5;
 
            if (this.props.data.financials && this.props.data.financials.length !== 0 ) {
 
@@ -85,15 +85,15 @@ class PaginationTable extends React.PureComponent {
 
                 <Table   bordered  hover >
 
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th >Fiscal Date</th>
-                        <th>Accounts Payable</th>
-                        <th>Cash Change</th>
-                        <th>Cash Flow</th>
-                    </tr>
-                    </thead>
+                    {/*<thead>*/}
+                    {/*<tr>*/}
+                    {/*    <th>#</th>*/}
+                    {/*    <th >Fiscal Date</th>*/}
+                    {/*    <th>Accounts Payable</th>*/}
+                    {/*    <th>Cash Change</th>*/}
+                    {/*    <th>Cash Flow</th>*/}
+                    {/*</tr>*/}
+                    {/*</thead>*/}
 
                 {this.props.data.financials  && this.props.data.financials.length !== 0  &&
                     (this.props.data.financials )
@@ -140,14 +140,14 @@ class PaginationTable extends React.PureComponent {
                         </PaginationItem>
                     )}
 
-                    <PaginationItem disabled={currentPage >= this.pagesCount + 1}>
+                    <PaginationItem disabled={currentPage >= this.pagesCount  }>
                         <PaginationLink
-                            onClick={e => this.handleClick(e, currentPage + 1)}
+                            onClick={e => this.handleClick(e, currentPage+1 )}
                             next />
                     </PaginationItem>
-                    <PaginationItem disabled={currentPage >= this.pagesCount + 1}>
+                    <PaginationItem disabled={currentPage >= this.pagesCount-1 }>
                         <PaginationLink
-                            onClick={e => this.handleClick(e,   this.pagesCount+1)}
+                            onClick={e => this.handleClick(e,   this.pagesCount)}
                             last
 
                         />
