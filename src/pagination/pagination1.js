@@ -107,8 +107,10 @@ class PaginationTable extends React.PureComponent {
 
                     .map((data, i) =>
 
-                    <tbody key={i} className={style.tab}>
+                    <tbody key={i} className={style.tab} draggable={true}>
+
                     <tr>
+
                     <th scope="row">{i + 1}</th>
                     <td>{data.fiscalDate}</td>
                     <td>{data.accountsPayable}</td>

@@ -4,19 +4,19 @@
     margin-left: 10%;
     /*cursor: pointer;*/
     margin-top: 20px;
+    cursor: grab
 
-
-    background: linear-gradient(
-           to top,
-           white ,
-         #e7e7e7 50%,
-         white 50%,
-           white
-          /*#eeebeb*/
-    );
-    /* Прямоугольник, в котором нужно повторить.*/
-    /*    В этом случае он может быть полностью широким.*/
-    background-size: 100%  100px;
+    /*background: linear-gradient(*/
+    /*       to top,*/
+    /*       white ,*/
+    /*     #e7e7e7 50%,*/
+    /*     white 50%,*/
+    /*       white*/
+    /*      !*#eeebeb*!*/
+    /*);*/
+    /*!* Прямоугольник, в котором нужно повторить.*!*/
+    /*!*    В этом случае он может быть полностью широким.*!*/
+    /*background-size: 100%  100px;*/
 }
 
 .pagination {
@@ -34,7 +34,10 @@
     background-color: #fff;
     border-color: #dee2e6;
 }
+
 .page-item.disabled {
     cursor: not-allowed ;
 }
-
+ th {
+    cursor: default;
+}

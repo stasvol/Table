@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { Table } from 'reactstrap';
 import  style from './../module.css/module.css'
-import PaginationTable from "../pagination/pagination1";
+import PaginationTable from "../pagination/pagination";
 
 
 
@@ -9,6 +9,7 @@ const DataTable =({...props})=> {
 
     return (
             <div>
+
                 <h2>Symbol: AAPL </h2>
                 {/*{ props.data && props.data.length !==0 &&*/}
                 {/*props.data.financials.map((data,index)=> <div><span>EBITDA:{data.EBITDA}</span>*/}
