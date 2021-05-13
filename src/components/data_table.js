@@ -119,7 +119,7 @@ const DataTable =({...props})=> {
 
             {/*</Table>*/}
 
-                <PaginationTable pages={props.pages} data={props.data}/>
+                <PaginationTable pages={props.pages} data={props.data} {...props} children/>
 
 
 

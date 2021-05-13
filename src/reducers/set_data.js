@@ -3,7 +3,6 @@ const DATA_FETCH ='DATA_FETCH'
 
 const initialState ={
     data:[],
-    tableSize: 10,
 }
 
 
