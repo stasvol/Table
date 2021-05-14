@@ -25,7 +25,7 @@ class PaginationTable extends React.PureComponent {
 
            this.state = {
             currentPage: 0,
-
+            currentData: null
         };
     }
 
@@ -37,6 +37,45 @@ class PaginationTable extends React.PureComponent {
             currentPage: index
         });
 
+    }
+
+     dragStartHandler=(e,data)=>{
+       this.setState({
+           currentData:data
+       })
+
+    }
+    dragLeaveHandler=(e)=>{
+
+    }
+   dragEndHandler=(e)=>{
+        // e.target.style.background = 'lightgray'
+    }
+    dragOverHandler=(e)=>{
+        e.preventDefault()
+        // e.target.style.background = 'white'
+    }
+     dropHandler=(e,data)=>{
+
+        e.preventDefault()
+
+        this.setState(this.props.data.financials.map(d =>{
+            if (d.accountsPayable === data.accountsPayable){
+                return {...d,accountsPayable:this.currentData.accountsPayable}
+            }
+            if (d.accountsPayable  === this.currentData.accountsPayable){
+                return {...d,accountsPayable:data.accountsPayable}
+            }
+            return d
+        }))
+        // e.target.style.background = 'lightgray'
+    }
+    sortData =(a,b)=>{
+        if (a.data > b.data) {
+            return 1
+        } else {
+            return -1
+        }
     }
 
     render() {
@@ -105,9 +144,15 @@ class PaginationTable extends React.PureComponent {
                         (currentPage + 1) * this.props.pages.pageSize
                     )
 
-                    .map((data, i) =>
+                        .sort(this.sortData).map((data, i) =>
 
-                    <tbody key={i} className={style.tab} draggable={true}>
+                    <tbody key={i} className={style.tab}
+                           onDragStart={(e) =>this.dragStartHandler(e,data.accountsPayable)}
+                           onDragLeave={(e)=>this.dragLeaveHandler(e)}
+                           onDragEnd={(e)=>this.dragEndHandler(e)}
+                           onDragOver={(e)=>this.dragOverHandler(e)}
+                           onDrop={(e)=>this.dropHandler(e,data.accountsPayable)}
+                           draggable={true}>
 
                     <tr>
 
