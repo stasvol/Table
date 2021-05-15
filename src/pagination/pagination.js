@@ -47,41 +47,43 @@ const PaginationTable = ({...props}) => {
     //     const rightBorder = pageNumber * pageButtonCount
 
 
-    const dragStartHandler=(e)=>{
+    const dragStartHandler=(e,data)=>{
 
-            // setCurrentData(data)
-        e.dataTransfer.setData("id",e.target.id)
+            setCurrentData(data)
+        // e.dataTransfer.setData("id",e.target.id)
+        console.log('drag',data)
     }
     const dragLeaveHandler=(e)=>{
 
     }
     const dragEndHandler=(e)=>{
-        // e.target.style.background = 'lightgray'
+        // e.target.style.background = 'white'
     }
     const dragOverHandler=(e)=>{
          e.preventDefault()
-        // e.target.style.background = 'white'
+        // e.target.style.background = 'lightgray'
     }
     const dropHandler=(e,data)=>{
 
             e.preventDefault()
-     let dataAccessKey = e.dataTransfer.getData("id")
-          console.log(dataAccessKey)
+     // let dataAccessKey = e.dataTransfer.getData("id")
+     //      console.log(dataAccessKey)
         // e.target.append(dataAccessKey)
-
+        console.log('drop',data)
         setCurrentData(props.data.financials.map(d =>{
-            if (d.accountsPayable === data.accountsPayable){
-                return {...d,accountsPayable:currentData.accountsPayable}
+            if (d.id === data.id){
+                return {...d,fiscalYear:currentData.fiscalYear}
             }
-            if (d.accountsPayable  === currentData.accountsPayable){
-                return {...d,accountsPayable:data.accountsPayable}
+            if (d.id  === currentData.id){
+                return {...d,fiscalYear:data.fiscalYear}
             }
             return d
         }))
-         e.target.style.background = 'lightgray'
+         // e.target.style.background = 'lightgray'
     }
     const sortData =(a,b)=>{
-          if (a.data > b.data) {
+
+          if (a.i > b.i) {
               return 1
           } else {
               return -1
@@ -116,17 +118,17 @@ const PaginationTable = ({...props}) => {
 
                         .sort(sortData).map((data, i) =>
 
-                            <tbody key={i} className={style.tab} id={i+1}
+                            <tbody key={i} className={style.tr} id={i+1}
 
-                                   onDragStart={(e) =>dragStartHandler(e)}
+                                   onDragStart={(e) =>dragStartHandler(e,data)}
                                    onDragLeave={(e)=>dragLeaveHandler(e)}
                                    onDragEnd={(e)=>dragEndHandler(e)}
                                    onDragOver={(e)=>dragOverHandler(e)}
-                                   onDrop={(e)=>dropHandler(e)}
+                                   onDrop={(e)=>dropHandler(e,data)}
 
                                    draggable={true}>
 
-                            <tr>
+                            <tr >
 
                                 <td scope="row">{i+1}</td>
                                 <td>{data.fiscalDate}</td>
