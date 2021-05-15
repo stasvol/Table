@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Pagination, PaginationItem, PaginationLink, Table} from 'reactstrap';
 import style from "../module.css/module.css";
+import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 
 
 
@@ -46,9 +47,10 @@ const PaginationTable = ({...props}) => {
     //     const rightBorder = pageNumber * pageButtonCount
 
 
-    const dragStartHandler=(e,data)=>{
+    const dragStartHandler=(e)=>{
 
-        setCurrentData(data)
+            // setCurrentData(data)
+        e.dataTransfer.setData("id",e.target.id)
     }
     const dragLeaveHandler=(e)=>{
 
@@ -62,7 +64,10 @@ const PaginationTable = ({...props}) => {
     }
     const dropHandler=(e,data)=>{
 
-         e.preventDefault()
+            e.preventDefault()
+     let dataAccessKey = e.dataTransfer.getData("id")
+          console.log(dataAccessKey)
+        // e.target.append(dataAccessKey)
 
         setCurrentData(props.data.financials.map(d =>{
             if (d.accountsPayable === data.accountsPayable){
@@ -73,7 +78,7 @@ const PaginationTable = ({...props}) => {
             }
             return d
         }))
-         // e.target.style.background = 'lightgray'
+         e.target.style.background = 'lightgray'
     }
     const sortData =(a,b)=>{
           if (a.data > b.data) {
@@ -111,13 +116,13 @@ const PaginationTable = ({...props}) => {
 
                         .sort(sortData).map((data, i) =>
 
-                            <tbody key={i} className={style.tab}
+                            <tbody key={i} className={style.tab} id={i+1}
 
-                                   onDragStart={(e) =>dragStartHandler(e,data.accountsPayable)}
+                                   onDragStart={(e) =>dragStartHandler(e)}
                                    onDragLeave={(e)=>dragLeaveHandler(e)}
                                    onDragEnd={(e)=>dragEndHandler(e)}
                                    onDragOver={(e)=>dragOverHandler(e)}
-                                   onDrop={(e)=>dropHandler(e,data.accountsPayable)}
+                                   onDrop={(e)=>dropHandler(e)}
 
                                    draggable={true}>
 

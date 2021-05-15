@@ -1,7 +1,7 @@
 const SET_TABLE = 'SET_TABLE'
 
 const initialState = {
-     pageSize: 4,
+     pageSize: 10,
      // currentPage: 0,
     // countData:12,
     // pageDataCount:10,

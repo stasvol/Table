@@ -10,6 +10,7 @@ import DataTable from "./components/data_table";
 import React, {useEffect} from "react";
 import TestTable from "./components/testTable";
 import PaginationTable from "./pagination/pagination1";
+import Simple from "./components/drag";
 
 
 
@@ -54,6 +55,7 @@ function App (props) {
          {/*<PaginationTable/>*/}
         {/*<TableTwo/>*/}
        {/*<TestTable/>*/}
+       {/*<Simple/>*/}
     </div>
   );
 }

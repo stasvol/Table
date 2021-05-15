@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { Table } from 'reactstrap';
 import  style from './../module.css/module.css'
-import PaginationTable from "../pagination/pagination1";
+import PaginationTable from "../pagination/pagination";
 
 
 
