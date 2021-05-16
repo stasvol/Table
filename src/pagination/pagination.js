@@ -4,8 +4,6 @@ import style from "../module.css/module.css";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 
 
-
-
 const PaginationTable = ({...props}) => {
 
     // props.pageSize = 10;
@@ -14,7 +12,7 @@ const PaginationTable = ({...props}) => {
     //     currentPage: 0
     // };
 
-        const pagesCount = Math.ceil(props.data.financials?.length / props.pages.pageSize)
+    const pagesCount = Math.ceil(props.data.financials?.length / props.pages.pageSize)
 
     // let addPages = []
     //
@@ -22,18 +20,35 @@ const PaginationTable = ({...props}) => {
     //     addPages.push(i)
     // }
 
-    const [currentPage,setCurrentPage] = useState(0)
+    const [currentPage, setCurrentPage] = useState(0)
 
-    const [currentData,setCurrentData] = useState(null)
-
-   const handleClick =(e, index) =>{
+    const handleClick = (e, index) => {
 
         e.preventDefault();
-       setCurrentPage(index)
-
+        setCurrentPage(index)
     }
 
-   console.log(currentPage)
+
+    const mappedData = props?.data?.financials?.map(({
+         fiscalDate,
+         accountsPayable,
+         cashChange,
+         cashFlow
+     }, i) => ({
+        order: i,
+        id: new Date().getTime(),
+        fiscalDate,
+        accountsPayable,
+        cashChange,
+        cashFlow
+    }));
+    const [data, setData] = useState(mappedData)
+
+    console.log(data);
+
+
+
+    // console.log(currentPage)
 
     // const pagesCount = Math.ceil(props.pages.countData / props.pages.pageDataCount)  // к-ть стор.= заг. к-ть даних / поділ. на к-ть даних на стор.
     // const pagesAdd = [];
@@ -47,120 +62,133 @@ const PaginationTable = ({...props}) => {
     //     const rightBorder = pageNumber * pageButtonCount
 
 
-    const dragStartHandler=(e,data)=>{
+    const dragStartHandler = (e, data) => {
 
-            setCurrentData(data)
+        setData(data)
         // e.dataTransfer.setData("id",e.target.id)
-        console.log('drag',data)
+        console.log('drag', data)
     }
-    const dragLeaveHandler=(e)=>{
-
-    }
-    const dragEndHandler=(e)=>{
+    const dragLeaveHandler = (e) => {
         // e.target.style.background = 'white'
+        e.target.style.boxShadow = 'none'
     }
-    const dragOverHandler=(e)=>{
-         e.preventDefault()
+    const dragEndHandler = (e) => {
+        // e.target.style.background = 'white'
+        e.target.style.boxShadow = 'none'
+    }
+    const dragOverHandler = (e) => {
+        e.preventDefault()
+        // setCurrentData(data)
+        // if (e.target.className === 'table'){
+        e.target.style.boxShadow = '0 4px 8px gray'
+        // }
         // e.target.style.background = 'lightgray'
     }
-    const dropHandler=(e,data)=>{
+    const dropHandler = (e, data) => {
 
-            e.preventDefault()
-     // let dataAccessKey = e.dataTransfer.getData("id")
-     //      console.log(dataAccessKey)
+        e.preventDefault()
+        // setCurrentData([data,e.dataTransfer.getData(e.target.id)])
+        // let dataAccessKey = e.dataTransfer.getData("id")
+        //      console.log(dataAccessKey)
         // e.target.append(dataAccessKey)
-        console.log('drop',data)
-        setCurrentData(props.data.financials.map(d =>{
-            if (d.id === data.id){
-                return {...d,fiscalYear:currentData.fiscalYear}
-            }
-            if (d.id  === currentData.id){
-                return {...d,fiscalYear:data.fiscalYear}
-            }
-            return d
-        }))
-         // e.target.style.background = 'lightgray'
+
+        console.log('drop', data)
+
+        setData(data => [...data].map((d, index) => {
+
+                // if (i === index) {
+                //     return {...d, data: currentData.i}
+                // }
+                //
+                // if (d.i === currentData.i) {
+                //     return {...d, currentData: data.i}
+                // }
+                // return d
+            })
+        );
+        // e.target.style.background = 'lightgray'
+        e.target.style.boxShadow = 'none'
     }
-    const sortData =(a,b)=>{
+    const sortData = (a, b) => {
 
-          if (a.i > b.i) {
-              return 1
-          } else {
-              return -1
-          }
+        if (a.i > b.i) {
+            return 1
+        } else {
+            return -1
+        }
+
     }
 
-        return (
+    return (
 
-            <>
+        <>
 
-                <Table   bordered  hover >
+            <Table bordered hover>
 
 
-                    <thead className={style.head} >
+                <thead className={style.head}>
+
+                <tr>
+                    <th>#</th>
+                    <th>Fiscal Date</th>
+                    <th>Accounts Payable</th>
+                    <th>Cash Change</th>
+                    <th>Cash Flow</th>
+                </tr>
+
+                </thead>
+
+                {props.data.financials && props.data.financials.length !== 0 &&
+                props.data.financials
+                    .slice(
+                        currentPage * props.pages.pageSize,
+                        (currentPage + 1) * props.pages.pageSize
+                    )
+
+                    .sort(sortData).map((data, i) =>
+
+                    <tbody key={i} className={style.tr}
+
+                           onDragStart={(e) => dragStartHandler(e, data)}
+                           onDragLeave={(e) => dragLeaveHandler(e)}
+                           onDragEnd={(e) => dragEndHandler(e)}
+                           onDragOver={(e) => dragOverHandler(e)}
+                           onDrop={(e) => dropHandler(e, data)}
+
+                           draggable={true}>
 
                     <tr>
-                        <th>#</th>
-                        <th>Fiscal Date</th>
-                        <th>Accounts Payable</th>
-                        <th>Cash Change</th>
-                        <th>Cash Flow</th>
+
+                        <td scope="row">{i + 1}</td>
+                        <td>{data.fiscalDate}</td>
+                        <td>{data.accountsPayable} </td>
+                        <td>{data.cashChange} </td>
+                        <td>{data.cashFlow} </td>
+
                     </tr>
 
-                    </thead>
-
-                    {props.data.financials  && props.data.financials.length !== 0  &&
-                    props.data.financials
-                        .slice(
-                            currentPage * props.pages.pageSize,
-                            (currentPage + 1) * props.pages.pageSize
-                        )
-
-                        .sort(sortData).map((data, i) =>
-
-                            <tbody key={i} className={style.tr} id={i+1}
-
-                                   onDragStart={(e) =>dragStartHandler(e,data)}
-                                   onDragLeave={(e)=>dragLeaveHandler(e)}
-                                   onDragEnd={(e)=>dragEndHandler(e)}
-                                   onDragOver={(e)=>dragOverHandler(e)}
-                                   onDrop={(e)=>dropHandler(e,data)}
-
-                                   draggable={true}>
-
-                            <tr >
-
-                                <td scope="row">{i+1}</td>
-                                <td>{data.fiscalDate}</td>
-                                <td>{data.accountsPayable} </td>
-                                <td>{data.cashChange} </td>
-                                <td>{data.cashFlow} </td>
-
-                            </tr>
-
-                            </tbody>
-
-                        )
-                    }
-                </Table>
+                    </tbody>
+                )
+                }
+            </Table>
             <Pagination aria-label="Page navigation example">
 
                 <PaginationItem disabled={currentPage <= 0}>
-                    <PaginationLink first onClick={e => handleClick(e, currentPage <=0)}  href="#"/>
+                    <PaginationLink first onClick={e => handleClick(e, currentPage <= 0)} href="#"/>
                 </PaginationItem>
                 <PaginationItem disabled={currentPage <= 0}>
-                    <PaginationLink previous  onClick={e => handleClick(e, currentPage - 1)}   href="#"/>
+                    <PaginationLink previous onClick={e => handleClick(e, currentPage - 1)} href="#"/>
                 </PaginationItem>
 
-                {  props.data && props.data.length &&
-                    [...Array(pagesCount)].map((page, i ) =>
+                {props.data && props.data.length &&
+                [...Array(pagesCount)].map((page, i) =>
 
-                        <PaginationItem active={i===currentPage} key={i}>
-                            <PaginationLink onClick={e =>handleClick(e, i)} href="#">
-                               {i + 1} {page+i}
-                            </PaginationLink>
-                        </PaginationItem>
-                    )
+                    <PaginationItem active={i === currentPage} key={i}>
+                        <PaginationLink onClick={e => handleClick(e, i)} href="#">
+                            {i + 1}
+                        </PaginationLink>
+                    </PaginationItem>
+                )
                 }
                 <PaginationItem disabled={currentPage >= pagesCount - 1}>
                     <PaginationLink onClick={e => handleClick(e, currentPage + 1)} next href="#"/>
@@ -170,24 +198,24 @@ const PaginationTable = ({...props}) => {
                 {/*    <PaginationLink next />*/}
                 {/*</PaginationItem>*/}
                 <PaginationItem disabled={currentPage >= pagesCount - 1}>
-                    <PaginationLink last onClick={e => handleClick(e,  pagesCount -1)} href="#" />
+                    <PaginationLink last onClick={e => handleClick(e, pagesCount - 1)} href="#"/>
                 </PaginationItem>
             </Pagination>
 
-           {/*{ props.data*/}
+            {/*{ props.data*/}
 
-           {/*    .slice(*/}
-           {/*        currentPage * props.pageSize,*/}
-           {/*        (currentPage + 1) * props.pageSize*/}
-           {/*    )*/}
-           {/*    .map((data, i) =>*/}
-           {/*        <div className="data-slice" key={i}>*/}
-           {/*            {data}*/}
-           {/*        </div>*/}
-           {/*    )}*/}
+            {/*    .slice(*/}
+            {/*        currentPage * props.pageSize,*/}
+            {/*        (currentPage + 1) * props.pageSize*/}
+            {/*    )*/}
+            {/*    .map((data, i) =>*/}
+            {/*        <div className="data-slice" key={i}>*/}
+            {/*            {data}*/}
+            {/*        </div>*/}
+            {/*    )}*/}
 
-       </>
-        );
+        </>
+    );
 
 }
 
