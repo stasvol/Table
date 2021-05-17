@@ -43,6 +43,7 @@ const PaginationTable = ({...props}) => {
         cashFlow
     }));
     const [data, setData] = useState(mappedData)
+    const [currentData,setCurrentData] = useState(null)
 
     console.log(data);
 
@@ -64,7 +65,7 @@ const PaginationTable = ({...props}) => {
 
     const dragStartHandler = (e, data) => {
 
-        setData(data)
+        setCurrentData(data)
         // e.dataTransfer.setData("id",e.target.id)
         console.log('drag', data)
     }
@@ -96,14 +97,14 @@ const PaginationTable = ({...props}) => {
 
         setData(data => [...data].map((d, index) => {
 
-                // if (i === index) {
-                //     return {...d, data: currentData.i}
-                // }
-                //
-                // if (d.i === currentData.i) {
-                //     return {...d, currentData: data.i}
-                // }
-                // return d
+                if (d.id === data.id) {
+                    return {...d, order:currentData.order }
+                }
+
+                if (d.id === currentData.id) {
+                    return {...d, order: data.order}
+                }
+                return d
             })
         );
         // e.target.style.background = 'lightgray'
@@ -111,7 +112,7 @@ const PaginationTable = ({...props}) => {
     }
     const sortData = (a, b) => {
 
-        if (a.i > b.i) {
+        if (a.order > b.order) {
             return 1
         } else {
             return -1
@@ -139,7 +140,7 @@ const PaginationTable = ({...props}) => {
                 </thead>
 
                 {props.data.financials && props.data.financials.length !== 0 &&
-                props.data.financials
+                 data
                     .slice(
                         currentPage * props.pages.pageSize,
                         (currentPage + 1) * props.pages.pageSize
