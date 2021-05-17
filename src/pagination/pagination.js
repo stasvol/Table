@@ -36,7 +36,7 @@ const PaginationTable = ({...props}) => {
          cashFlow
      }, i) => ({
         order: i,
-        id: new Date().getTime(),
+        id: Math.ceil(Math.random(new Date().getTime())*100 ),
         fiscalDate,
         accountsPayable,
         cashChange,
@@ -45,7 +45,7 @@ const PaginationTable = ({...props}) => {
     const [data, setData] = useState(mappedData)
     const [currentData,setCurrentData] = useState(null)
 
-    console.log(data);
+    // console.log(data);
 
 
 
@@ -113,18 +113,19 @@ const PaginationTable = ({...props}) => {
     const sortData = (a, b) => {
 
         if (a.order > b.order) {
-            return 1
+            return  1
         } else {
             return -1
         }
 
+        // return 0;
     }
 
     return (
 
         <>
 
-            <Table bordered hover>
+            <Table bordered hover >
 
 
                 <thead className={style.head}>
@@ -158,9 +159,9 @@ const PaginationTable = ({...props}) => {
 
                            draggable={true}>
 
-                    <tr>
+                    <tr >
 
-                        <td scope="row">{i + 1}</td>
+                        <td scope="row" >{i + 1}</td>
                         <td>{data.fiscalDate}</td>
                         <td>{data.accountsPayable} </td>
                         <td>{data.cashChange} </td>
@@ -181,7 +182,8 @@ const PaginationTable = ({...props}) => {
                     <PaginationLink previous onClick={e => handleClick(e, currentPage - 1)} href="#"/>
                 </PaginationItem>
 
-                {props.data && props.data.length &&
+                {
+                    // props.data && props.data.length &&
                 [...Array(pagesCount)].map((page, i) =>
 
                     <PaginationItem active={i === currentPage} key={i}>

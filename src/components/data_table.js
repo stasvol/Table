@@ -120,9 +120,9 @@ const DataTable =({...props})=> {
 
             {/*</Table>*/}
 
-                {props.data.financials && (
+                {/*{props.data.financials && (*/}
                     <PaginationTable pages={props.pages} data={props.data} {...props} children/>
-                )}
+                {/*)}*/}
 
 
 
