@@ -4,7 +4,7 @@ import style from "../module.css/module.css";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 
 
-const PaginationTable = ({...props}) => {
+const PaginationTable = ({numberPage=1,...props}) => {
 
     // props.pageSize = 10;
 
@@ -20,11 +20,14 @@ const PaginationTable = ({...props}) => {
     //     addPages.push(i)
     // }
 
+
     const [currentPage, setCurrentPage] = useState(0)
+    // ((currentPage - 1) * props.pages.pageSize) + (index + 1)
 
     const handleClick = (e, index) => {
 
         e.preventDefault();
+
         setCurrentPage(index)
     }
 
@@ -35,18 +38,17 @@ const PaginationTable = ({...props}) => {
          cashChange,
          cashFlow
      }, i) => ({
-        order: i,
-        id: Math.ceil(Math.random(new Date().getTime())*100 ),
+        // index: i,
+        order: i+1,
+        id: Math.ceil(new Date().getTime() * Math.random()*100 ),
         fiscalDate,
         accountsPayable,
         cashChange,
-        cashFlow
+        cashFlow,
     }));
+
     const [data, setData] = useState(mappedData)
     const [currentData,setCurrentData] = useState(null)
-
-    // console.log(data);
-
 
 
     // console.log(currentPage)
@@ -66,49 +68,41 @@ const PaginationTable = ({...props}) => {
     const dragStartHandler = (e, data) => {
 
         setCurrentData(data)
-        // e.dataTransfer.setData("id",e.target.id)
         console.log('drag', data)
     }
-    const dragLeaveHandler = (e) => {
-        // e.target.style.background = 'white'
-        e.target.style.boxShadow = 'none'
-    }
+
     const dragEndHandler = (e) => {
-        // e.target.style.background = 'white'
-        e.target.style.boxShadow = 'none'
+        // e.currentTarget.style.background = 'white'
+        e.currentTarget.style.boxShadow = 'none'
     }
+
     const dragOverHandler = (e) => {
+
         e.preventDefault()
-        // setCurrentData(data)
-        // if (e.target.className === 'table'){
-        e.target.style.boxShadow = '0 4px 8px gray'
-        // }
-        // e.target.style.background = 'lightgray'
+    // e.currentTarget.style.background = '#d5f5f5'
+    e.currentTarget.style.boxShadow = '.2em .2em #d5f5f5, -0 .2em 1em .6em #d5f5f5'
+        // '-6px   -6px    #d4eefa'
+
     }
-    const dropHandler = (e, data) => {
-
+    const dropHandler = (e, row) => {
         e.preventDefault()
-        // setCurrentData([data,e.dataTransfer.getData(e.target.id)])
-        // let dataAccessKey = e.dataTransfer.getData("id")
-        //      console.log(dataAccessKey)
-        // e.target.append(dataAccessKey)
 
-        console.log('drop', data)
+        console.log('drop', row)
 
-        setData(data => [...data].map((d, index) => {
+        setData(data.map((d, index) => {
 
-                if (d.id === data.id) {
+                if (d.id === row.id) {
                     return {...d, order:currentData.order }
                 }
 
                 if (d.id === currentData.id) {
-                    return {...d, order: data.order}
+                    return {...d, order: row.order}
                 }
                 return d
             })
         );
-        // e.target.style.background = 'lightgray'
-        e.target.style.boxShadow = 'none'
+        // e.currentTarget.style.background = 'white'
+        e.currentTarget.style.boxShadow = 'none'
     }
     const sortData = (a, b) => {
 
@@ -140,19 +134,22 @@ const PaginationTable = ({...props}) => {
 
                 </thead>
 
-                {props.data.financials && props.data.financials.length !== 0 &&
+                {
+                    // props.data.financials && props.data.financials.length !== 0 &&
                  data
                     .slice(
+
                         currentPage * props.pages.pageSize,
-                        (currentPage + 1) * props.pages.pageSize
+                        (currentPage + 1) * props.pages.pageSize,
+                        // (currentPage-1) *props.pages.pageSize + 1,
                     )
 
                     .sort(sortData).map((data, i) =>
 
-                    <tbody key={i} className={style.tr}
+                    <tbody key={i} className={style.active}
 
                            onDragStart={(e) => dragStartHandler(e, data)}
-                           onDragLeave={(e) => dragLeaveHandler(e)}
+                           onDragLeave={(e) => dragEndHandler(e)}
                            onDragEnd={(e) => dragEndHandler(e)}
                            onDragOver={(e) => dragOverHandler(e)}
                            onDrop={(e) => dropHandler(e, data)}
@@ -161,7 +158,7 @@ const PaginationTable = ({...props}) => {
 
                     <tr >
 
-                        <td scope="row" >{i + 1}</td>
+                        <th scope="row">{((currentPage) * props.pages.pageSize) + (i + 1)}</th>
                         <td>{data.fiscalDate}</td>
                         <td>{data.accountsPayable} </td>
                         <td>{data.cashChange} </td>

@@ -42,3 +42,14 @@
     cursor: default;
 }
 
+tbody:nth-child(even) {background: #ecebeb !important;}
+tbody:nth-child(odd) {background: #FFF}
+ /*tr:nth-child(odd) {*/
+ /*    background: lime;*/
+ /*}*/
+/*table tr:nth-child(3) {*/
+/*    background: #ccc;*/
+/*}*/
+.tr{
+    background: #d4eefa;
+}

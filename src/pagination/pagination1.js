@@ -16,10 +16,10 @@ class PaginationTable extends React.PureComponent {
 
         // this.pageSize = 2;
 
-           if (this.props.data.financials && this.props.data.financials.length !== 0 ) {
+           // if (this.props.data.financials && this.props.data.financials.length !== 0 ) {
 
                this.pagesCount = Math.ceil(this.props.data.financials.length / this.props.pages.pageSize);
-           }
+           // }
 
            this.state = {
             currentPage: 0,
@@ -68,20 +68,22 @@ class PaginationTable extends React.PureComponent {
         e.preventDefault()
         // e.target.style.background = 'lightgray'
     }
-     dropHandler=(e,data)=>{
+     dropHandler=(e,card)=>{
 
         e.preventDefault()
-         console.log('drop', data)
+         console.log('drop', card)
 
-        this.setState( this.state.data.map(d =>{
-            if (d.id === data.id){
-                return {...d,order:this.state.currentData.order}
-            }
-            if (d.id  === this.state.currentData.id){
-                return {...d,order:data.order}
-            }
-            return d
-        }))
+         const newData = this.state.data.map(d =>{
+             if (d.id === card.id){
+                 return {...d,order:this.state.currentData.order}
+             }
+             if (d.id  === this.state.currentData.id){
+                 return {...d,order:card.order}
+             }
+             return d
+         });
+
+        this.setState({ data: newData});
         // e.target.style.background = 'white'
     }
     sortData =(a,b)=>{
