@@ -80,10 +80,11 @@ const PaginationTable = ({numberPage=1,...props}) => {
 
         e.preventDefault()
     // e.currentTarget.style.background = '#d5f5f5'
-    e.currentTarget.style.boxShadow = '.2em .2em #d5f5f5, -0 .2em 1em .6em #d5f5f5'
+    e.currentTarget.style.boxShadow = '0  0 10px 7px rgba(0, 0, 0, .2)'
+        // '.2em .2em #d5f5f5, -0 .2em 1em .6em #d5f5f5'
         // '-6px   -6px    #d4eefa'
-
     }
+
     const dropHandler = (e, row) => {
         e.preventDefault()
 
