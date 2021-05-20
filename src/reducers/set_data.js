@@ -12,8 +12,8 @@ export const setDataRedux = (state=initialState,action) =>{
         case SET_DATA:
 
             return{
-                data: action.payload,
 
+                data: action.payload,
             }
 
         default:

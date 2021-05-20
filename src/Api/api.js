@@ -11,7 +11,6 @@ const API_KEY = 'Tpk_feb589a8931a45fead76ff039894d942';
 export const URL = `${BASE_PATH}${ENDPOINT_PATH}${STOCKS_COUNT}?${QUERY_PARAM}${API_KEY}`;
 
 
-
 // const instance = axios.create({
 //     withCredentials: true,
 //     baseURL: 'https://sandbox.iexapis.com/stable/stock/AAPL/financials/',
@@ -53,12 +52,12 @@ export const URL = `${BASE_PATH}${ENDPOINT_PATH}${STOCKS_COUNT}?${QUERY_PARAM}${
 // }
 // console.log(getData)
 
-export const asyncDataThunk = (data)=>(dispatch) => {
+export const asyncDataThunk = (data) => (dispatch) => {
 
-    return fetch( URL )
-        .then(response=> {
-            if (!response.ok){
-                 throw new Error(response.statusText)
+    return fetch(URL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(response.statusText)
             }
             return response
         })

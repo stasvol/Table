@@ -19,11 +19,11 @@ describe('async-thunk',()=> {
         fetchMock.restore()
     })
     it('should dispatches the correct actions on a failed fetch request',  ()=> {
-        fetchMock.getOnce( URL,{
-            headers:{'content-type':'application/json'},
-            body: {data:[9,9,9], status: 'ok'}
-        });
-        const expextAction = setDataAC([9,9,9])
+        fetchMock.getOnce( URL, JSON.stringify( [9,9,9]
+            // headers:{'content-type':'application/json'},
+            // body: {data:[999], status: 'ok'}
+        ))
+        const expextAction = [setDataAC([9,9,9])]
         const store = mockStore()
 
         return store.dispatch(asyncDataThunk()).then(()=>{
