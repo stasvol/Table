@@ -1,4 +1,4 @@
-const SET_TABLE = 'SET_TABLE'
+export const SET_TABLE = 'SET_TABLE'
 
 const initialState = {
      pageSize: 10,
@@ -16,7 +16,7 @@ export const setTableSize = (state=initialState,action)=>{
         case SET_TABLE:
 
             return {
-                currentPage:action.currentPage
+                currentPage:action.payload
             }
         default:
             return state

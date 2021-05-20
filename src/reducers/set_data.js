@@ -1,4 +1,4 @@
-const SET_DATA = 'SET_DATA'
+export const SET_DATA = 'SET_DATA'
 const DATA_FETCH ='DATA_FETCH'
 
 const initialState ={

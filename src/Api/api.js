@@ -55,7 +55,7 @@ export const URL = `${BASE_PATH}${ENDPOINT_PATH}${STOCKS_COUNT}?${QUERY_PARAM}${
 
 export const asyncDataThunk = (data)=>(dispatch) => {
 
-    fetch( URL )
+    return fetch( URL )
         .then(response=> {
             if (!response.ok){
                  throw new Error(response.statusText)
