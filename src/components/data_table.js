@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PaginationTable from '../pagination/pagination';
+import ComponentPagination from '../pagination/componentPagination';
 
 const DataTable = ({ data, pages }) => (
   <>
-    <h2>Symbol: AAPL </h2>
-    <PaginationTable data={data} pages={pages} />
+    <h2> Symbol: AAPL </h2>
+    <ComponentPagination data={data} pages={pages} />
   </>
 );
 

@@ -4,7 +4,7 @@ import { Pagination, PaginationItem, PaginationLink, Table } from 'reactstrap';
 
 import style from '../module.css/module.css';
 
-const PaginationTable = ({ ...props }) => {
+const ComponentPagination = ({ ...props }) => {
   const pagesCount = Math.ceil(
     props.data.financials?.length / props.pages.pageSize,
   );
@@ -166,7 +166,7 @@ const PaginationTable = ({ ...props }) => {
   );
 };
 
-PaginationTable.propTypes = {
+ComponentPagination.propTypes = {
   data: PropTypes.oneOfType([
     PropTypes.shape({
       financials: PropTypes.array,
@@ -182,4 +182,4 @@ PaginationTable.propTypes = {
   }).isRequired,
 };
 
-export default PaginationTable;
+export default ComponentPagination;

@@ -44,11 +44,6 @@ function App(props) {
       {data.financials && pages && (
         <DataTable data={data} pages={pages} {...props} />
       )}
-
-      {/* <PaginationTable/> */}
-      {/* <TableTwo/> */}
-      {/* <TestTable/> */}
-      {/* <Simple/> */}
     </div>
   );
 }
