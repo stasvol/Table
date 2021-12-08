@@ -2,7 +2,7 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import fetchMock from 'fetch-mock';
 
-import { URL, asyncDataThunk } from '../Api/api';
+import { URL, asyncDataThunk } from '../api/api';
 import { setDataAC } from './set_data';
 
 const middlewares = [thunk];

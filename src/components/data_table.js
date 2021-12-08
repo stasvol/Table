@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ComponentPagination from '../pagination/componentPagination';
+import TableComponent from '../container/table';
 
 const DataTable = ({ data, pages }) => (
   <>
     <h2> Symbol: AAPL </h2>
-    <ComponentPagination data={data} pages={pages} />
+    <TableComponent data={data} pages={pages} />
   </>
 );
 
 DataTable.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.arrayOf(PropTypes.number).isRequired,
   //   data: PropTypes.oneOfType([
   //     PropTypes.shape({
   //       financials: PropTypes.number,
@@ -21,7 +21,7 @@ DataTable.propTypes = {
   //       cashFlow: PropTypes.number,
   //     })
   //   ]) .isRequired,
-  pages: PropTypes.object.isRequired,
+  pages: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default DataTable;
