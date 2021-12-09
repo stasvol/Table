@@ -11,7 +11,7 @@ const DataTable = ({ data, pages }) => (
 );
 
 DataTable.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.number).isRequired,
+  data: PropTypes.object.isRequired,
   //   data: PropTypes.oneOfType([
   //     PropTypes.shape({
   //       financials: PropTypes.number,
@@ -21,7 +21,7 @@ DataTable.propTypes = {
   //       cashFlow: PropTypes.number,
   //     })
   //   ]) .isRequired,
-  pages: PropTypes.arrayOf(PropTypes.number).isRequired,
+  pages: PropTypes.object.isRequired,
 };
 
 export default DataTable;

@@ -40,7 +40,7 @@ export const useSort = initState => {
   };
   return {
     tableData,
-    currentData,
+    setCurrentData,
     dragStartHandler,
     dragEndHandler,
     dragOverHandler,

@@ -71,10 +71,10 @@ const ComponentPagination = ({ pagesCount, currentPage, handleClick }) => {
   //   // return 0;
   // };
 
-  const handleClicked = (e, i, pagesCount, currentPage) => {
-    e.preventDefault();
-    handleClick(e, i, pagesCount, currentPage);
-  };
+  // const handleClicked = (e, i, pagesCount, currentPage) => {
+  //   e.preventDefault();
+  //   handleClick(e, i, pagesCount, currentPage);
+  // };
 
   return (
     <>
@@ -120,28 +120,28 @@ const ComponentPagination = ({ pagesCount, currentPage, handleClick }) => {
       {/*    ))} */}
       {/* </Table> */}
 
-      <Pagination aria-label="Page navigation example">
+      <Pagination aria-label="Page navigation">
         <PaginationItem disabled={currentPage <= 0}>
-          <PaginationLink first onClick={handleClicked} />{' '}
+          <PaginationLink first onClick={handleClick} />{' '}
         </PaginationItem>
 
         <PaginationItem disabled={currentPage <= 0}>
-          <PaginationLink onClick={handleClicked} previous />
+          <PaginationLink onClick={handleClick} previous />
         </PaginationItem>
 
         {[...Array(pagesCount)].map((page, i) => (
-          <PaginationItem key={page} active={i === currentPage}>
+          <PaginationItem key={`${page}${i}`} active={i === currentPage}>
             <PaginationLink onClick={e => handleClick(e, i)}>
               {i + 1}
             </PaginationLink>
           </PaginationItem>
         ))}
         <PaginationItem disabled={currentPage >= pagesCount - 1}>
-          <PaginationLink next onClick={handleClicked} />
+          <PaginationLink next onClick={handleClick} />
         </PaginationItem>
 
         <PaginationItem disabled={currentPage >= pagesCount - 1}>
-          <PaginationLink last onClick={handleClicked} />
+          <PaginationLink last onClick={handleClick} />
         </PaginationItem>
       </Pagination>
     </>
@@ -149,16 +149,12 @@ const ComponentPagination = ({ pagesCount, currentPage, handleClick }) => {
 };
 
 ComponentPagination.propTypes = {
-  // financials: PropTypes.arrayOf(PropTypes.number),
-  // pageSize: PropTypes.number,
   pagesCount: PropTypes.number,
   currentPage: PropTypes.number,
   handleClick: PropTypes.func,
 };
 
 ComponentPagination.defaultProps = {
-  // financials: [],
-  // pageSize: 0,
   pagesCount: 0,
   currentPage: 0,
   handleClick: () => {},
