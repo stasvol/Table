@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { asyncDataThunk } from '../api/api';
 import DataTable from '../components/data_table';
 
-import '../App.css';
-
 function App(props) {
   const dispatch = useDispatch();
   const data = useSelector(({ data }) => ({ ...data.data }));

@@ -7,9 +7,9 @@ export const usePagination = (initState = 0) => {
     e.preventDefault();
     setCurrentPage(index);
   };
-  const handleClick = (e, i, pagesCount, currentPage) => {
+  const handleClick = (e, pagesCount, currentPage) => {
     e.preventDefault();
-    handleClicked(e, i, pagesCount, currentPage);
+    handleClicked(e, pagesCount, currentPage);
   };
 
   return [currentPage, handleClick];
