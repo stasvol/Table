@@ -7,7 +7,7 @@ import { store } from './store/store';
 import App from './container/app';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import './module.css/index.css';
+import './styles/index.css';
 
 ReactDOM.render(
   <React.StrictMode>

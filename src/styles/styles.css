@@ -28,6 +28,7 @@
 .page-item.disabled {
   cursor: not-allowed;
 }
+
 th {
   cursor: default;
 }
@@ -35,6 +36,7 @@ th {
 tbody:nth-child(even) {
   background: #ecebeb !important;
 }
+
 tbody:nth-child(odd) {
   background: #fff;
 }

@@ -1,7 +1,7 @@
 export const SET_TABLE = 'SET_TABLE';
 
 const initialState = {
-  pageSize: 10,
+  pageSize: 2,
 };
 
 export const setTableSize = (state = initialState, action) => {

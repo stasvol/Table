@@ -12,15 +12,12 @@ describe('testing reducers', () => {
       payload: [1, 2, 3],
     };
     expect(setDataRedux(state, action)).toEqual({
-      // ...state,
       data: action.payload,
     });
   });
 
   it('setTableSize', () => {
-    const state = {
-      // pageSize: 3
-    };
+    const state = {};
     const action = {
       type: SET_TABLE,
       payload: 9,
@@ -40,7 +37,6 @@ describe('testing reducers', () => {
     };
 
     expect(usersReduc(state, action)).toEqual({
-      // ...state,
       users: action.payload,
     });
   });

@@ -20,24 +20,21 @@ export const useSort = initState => {
   const dropHandler = (e, row) => {
     e.preventDefault();
     setTableData(
-      tableData.map(d => {
-        if (d.id === row.id) {
-          return { ...d, order: currentData.order };
+      tableData.map(data => {
+        if (data.id === row.id) {
+          return { ...data, order: currentData.order };
         }
-        if (d.id === currentData.id) {
-          return { ...d, order: row.order };
+        if (data.id === currentData.id) {
+          return { ...data, order: row.order };
         }
-        return d;
+        return data;
       }),
     );
     e.currentTarget.style.boxShadow = 'none';
   };
-  const sortData = (a, b) => {
-    if (a.order > b.order) {
-      return 1;
-    }
-    return -1;
-  };
+
+  const sortData = (a, b) => (a.order > b.order ? 1 : -1);
+
   return {
     tableData,
     setCurrentData,

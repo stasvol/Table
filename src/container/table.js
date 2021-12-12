@@ -6,7 +6,7 @@ import { usePagination } from '../hooks/usePagination';
 import { useSort } from '../hooks/useSort';
 import ComponentPagination from '../pagination/componentPagination';
 
-import style from '../module.css/module.css';
+import style from '../styles/styles.css';
 
 const TableComponent = ({ data: { financials }, pages: { pageSize } }) => {
   const pagesCount = Math.ceil(financials?.length / pageSize);
@@ -46,27 +46,31 @@ const TableComponent = ({ data: { financials }, pages: { pageSize } }) => {
         {tableData
           .slice(currentPage * pageSize, (currentPage + 1) * pageSize)
           .sort(sortData)
-          .map((row, i) => (
-            <tbody
-              key={i}
-              className={style.active}
-              draggable
-              onDragEnd={dragEndHandler}
-              onDragLeave={dragEndHandler}
-              onDragOver={dragOverHandler}
-              onDragStart={e => dragStartHandler(e, row)}
-              onDrop={e => dropHandler(e, row)}
-              role="presentation"
-            >
-              <tr>
-                <th scope="row">{currentPage * pageSize + (i + 1)}</th>
-                <td>{row.fiscalDate}</td>
-                <td>{row.accountsPayable} </td>
-                <td>{row.cashChange} </td>
-                <td>{row.cashFlow} </td>
-              </tr>
-            </tbody>
-          ))}
+          .map((row, i) => {
+            const startHandler = e => dragStartHandler(e, row);
+            const dropEnd = e => dropHandler(e, row);
+            return (
+              <tbody
+                key={i}
+                className={style.active}
+                draggable
+                onDragEnd={dragEndHandler}
+                onDragLeave={dragEndHandler}
+                onDragOver={dragOverHandler}
+                onDragStart={startHandler}
+                onDrop={dropEnd}
+                role="presentation"
+              >
+                <tr>
+                  <th scope="row">{currentPage * pageSize + (i + 1)}</th>
+                  <td>{row.fiscalDate}</td>
+                  <td>{row.accountsPayable} </td>
+                  <td>{row.cashChange} </td>
+                  <td>{row.cashFlow} </td>
+                </tr>
+              </tbody>
+            );
+          })}
       </Table>
 
       <ComponentPagination
@@ -88,6 +92,7 @@ TableComponent.propTypes = {
       cashFlow: PropTypes.number,
     }),
   ]).isRequired,
+
   pages: PropTypes.shape({
     pageSize: PropTypes.number,
     currentPage: PropTypes.number,

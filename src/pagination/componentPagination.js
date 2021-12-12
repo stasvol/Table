@@ -2,35 +2,42 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
-const ComponentPagination = ({ pagesCount, currentPage, handleClick }) => (
-  <Pagination aria-label="Page navigation">
-    <PaginationItem disabled={currentPage <= 0}>
-      <PaginationLink
-        first
-        onClick={e => handleClick(e, currentPage - currentPage)}
-      />
-    </PaginationItem>
+const ComponentPagination = ({ pagesCount, currentPage, handleClick }) => {
+  const firstClick = e => handleClick(e, currentPage - currentPage);
+  const previousClick = e => handleClick(e, currentPage - 1);
+  const nextClick = e => handleClick(e, currentPage + 1);
+  const lastClick = e => handleClick(e, pagesCount - 1);
+  const endFirstPages = currentPage <= 0;
+  const endLastPages = currentPage >= pagesCount - 1;
 
-    <PaginationItem disabled={currentPage <= 0}>
-      <PaginationLink onClick={e => handleClick(e, currentPage - 1)} previous />
-    </PaginationItem>
-
-    {[...Array(pagesCount)].map((page, i) => (
-      <PaginationItem key={`${page}${i}`} active={i === currentPage}>
-        <PaginationLink onClick={e => handleClick(e, i)}>
-          {i + 1}
-        </PaginationLink>
+  return (
+    <Pagination aria-label="Page navigation">
+      <PaginationItem disabled={endFirstPages}>
+        <PaginationLink first onClick={firstClick} />
       </PaginationItem>
-    ))}
-    <PaginationItem disabled={currentPage >= pagesCount - 1}>
-      <PaginationLink next onClick={e => handleClick(e, currentPage + 1)} />
-    </PaginationItem>
 
-    <PaginationItem disabled={currentPage >= pagesCount - 1}>
-      <PaginationLink last onClick={e => handleClick(e, pagesCount - 1)} />
-    </PaginationItem>
-  </Pagination>
-);
+      <PaginationItem disabled={endFirstPages}>
+        <PaginationLink onClick={previousClick} previous />
+      </PaginationItem>
+
+      {[...Array(pagesCount)].map((page, i) => {
+        const pagesClick = e => handleClick(e, i);
+        return (
+          <PaginationItem key={`${page}${i}`} active={i === currentPage}>
+            <PaginationLink onClick={pagesClick}>{i + 1}</PaginationLink>
+          </PaginationItem>
+        );
+      })}
+      <PaginationItem disabled={endLastPages}>
+        <PaginationLink next onClick={nextClick} />
+      </PaginationItem>
+
+      <PaginationItem disabled={endLastPages}>
+        <PaginationLink last onClick={lastClick} />
+      </PaginationItem>
+    </Pagination>
+  );
+};
 
 ComponentPagination.propTypes = {
   pagesCount: PropTypes.number,

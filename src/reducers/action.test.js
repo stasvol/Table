@@ -1,11 +1,5 @@
 import { SET_DATA, setDataAC } from './set_data';
 import { ADD_USERS, addUsersAC } from './users';
-// import configureStore from 'redux-mock-store';
-// import  thunk  from  'redux-thunk';
-// import fetchMock  from 'fetch-mock';
-
-// const middlewares = [thunk]
-// const mockStore = configureStore(middlewares)
 
 describe('actions', () => {
   it('setDataAC', () => {
