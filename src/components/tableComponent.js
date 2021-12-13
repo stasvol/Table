@@ -1,36 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Table } from 'reactstrap';
 
-import { usePagination } from '../hooks/usePagination';
-import { useSort } from '../hooks/useSort';
-import ComponentPagination from '../pagination/componentPagination';
+import PropTypes from 'prop-types';
+import { sortData } from '../utils/sort';
 
 import style from '../styles/styles.css';
 
-const TableComponent = ({ data: { financials }, pages: { pageSize } }) => {
-  const pagesCount = Math.ceil(financials?.length / pageSize);
-  const [currentPage, handleClick] = usePagination();
-
-  const mappedData = financials?.map(
-    ({ fiscalDate, accountsPayable, cashChange, cashFlow }, i) => ({
-      order: i + 1,
-      id: Math.ceil(new Date().getTime() * Math.random() * 100),
-      fiscalDate,
-      accountsPayable,
-      cashChange,
-      cashFlow,
-    }),
-  );
-  const {
-    tableData,
-    dragStartHandler,
-    dragEndHandler,
-    dragOverHandler,
-    dropHandler,
-    sortData,
-  } = useSort(mappedData);
-
+const TableComponent = ({
+  tableData,
+  dragStartHandler,
+  dragEndHandler,
+  dragOverHandler,
+  dropHandler,
+  currentPage,
+  pageSize,
+}) => {
   return (
     <>
       <Table bordered hover>
@@ -72,31 +56,25 @@ const TableComponent = ({ data: { financials }, pages: { pageSize } }) => {
             );
           })}
       </Table>
-
-      <ComponentPagination
-        currentPage={currentPage}
-        handleClick={handleClick}
-        pagesCount={pagesCount}
-      />
     </>
   );
 };
 
 TableComponent.propTypes = {
-  data: PropTypes.oneOfType([
-    PropTypes.shape({
-      financials: PropTypes.array,
-      fiscalDate: PropTypes.number,
-      accountsPayable: PropTypes.number,
-      cashChange: PropTypes.number,
-      cashFlow: PropTypes.number,
-    }),
-  ]).isRequired,
+  tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pageSize: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  dragStartHandler: PropTypes.func,
+  dragEndHandler: PropTypes.func,
+  dragOverHandler: PropTypes.func,
+  dropHandler: PropTypes.func,
+};
 
-  pages: PropTypes.shape({
-    pageSize: PropTypes.number,
-    currentPage: PropTypes.number,
-  }).isRequired,
+TableComponent.defaultProps = {
+  dragStartHandler: () => {},
+  dragEndHandler: () => {},
+  dragOverHandler: () => {},
+  dropHandler: () => {},
 };
 
 export default TableComponent;

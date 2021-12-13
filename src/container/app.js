@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { asyncDataThunk } from '../api/api';
 import DataTable from '../components/data_table';
 
-function App(props) {
+const App = props => {
   const dispatch = useDispatch();
-  const data = useSelector(({ data }) => ({ ...data.data }));
-  const pages = useSelector(({ pages }) => ({ ...pages }));
+  const data = useSelector(({ data }) => data.data);
+  const pages = useSelector(({ pages }) => pages);
 
   useEffect(() => {
     dispatch(asyncDataThunk());
@@ -20,6 +20,6 @@ function App(props) {
       )}
     </div>
   );
-}
+};
 
 export default App;

@@ -34,7 +34,7 @@ th {
 }
 
 tbody:nth-child(even) {
-  background: #ecebeb !important;
+  background: #ecebeb;
 }
 
 tbody:nth-child(odd) {

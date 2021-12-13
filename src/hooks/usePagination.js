@@ -7,6 +7,7 @@ export const usePagination = (initState = 0) => {
     e.preventDefault();
     setCurrentPage(index);
   };
+
   const handleClick = (e, pagesCount, currentPage) => {
     e.preventDefault();
     handleClicked(e, pagesCount, currentPage);

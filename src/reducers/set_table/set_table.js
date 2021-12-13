@@ -8,6 +8,7 @@ export const setTableSize = (state = initialState, action) => {
   switch (action.type) {
     case SET_TABLE:
       return {
+        ...state,
         currentPage: action.payload,
       };
     default:

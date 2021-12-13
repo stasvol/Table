@@ -1,26 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TableComponent from '../container/table';
+import TableContainer from '../container/tableContainer';
 
 const DataTable = ({ data, pages }) => (
   <>
     <h2> Symbol: AAPL </h2>
-    <TableComponent data={data} pages={pages} />
+    <TableContainer data={data} pages={pages} />
   </>
 );
 
 DataTable.propTypes = {
   data: PropTypes.object.isRequired,
-  //   data: PropTypes.oneOfType([
-  //     PropTypes.shape({
-  //       financials: PropTypes.number,
-  //       fiscalDate: PropTypes.number,
-  //       accountsPayable: PropTypes.number,
-  //       cashChange: PropTypes.number,
-  //       cashFlow: PropTypes.number,
-  //     })
-  //   ]) .isRequired,
   pages: PropTypes.object.isRequired,
 };
 
