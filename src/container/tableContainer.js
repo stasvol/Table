@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { usePagination } from '../hooks/usePagination';
 import { useDragEndDrop } from '../hooks/useDragEndDrop';
 import ComponentPagination from '../components/componentPagination';
-
 import TableComponent from '../components/tableComponent';
+import { sortData } from '../utils/sort';
 
 const TableContainer = ({ data: { financials }, pages: { pageSize } }) => {
   const pagesCount = Math.ceil(financials?.length / pageSize);
@@ -21,6 +21,7 @@ const TableContainer = ({ data: { financials }, pages: { pageSize } }) => {
       cashFlow,
     }),
   );
+
   const {
     tableData,
     dragStartHandler,
@@ -28,6 +29,10 @@ const TableContainer = ({ data: { financials }, pages: { pageSize } }) => {
     dragOverHandler,
     dropHandler,
   } = useDragEndDrop(mappedData);
+
+  const tableDataDragging = tableData
+    .slice(currentPage * pageSize, (currentPage + 1) * pageSize)
+    .sort(sortData);
 
   return (
     <>
@@ -38,7 +43,7 @@ const TableContainer = ({ data: { financials }, pages: { pageSize } }) => {
         dragStartHandler={dragStartHandler}
         dropHandler={dropHandler}
         pageSize={pageSize}
-        tableData={tableData}
+        tableDataDragging={tableDataDragging}
       />
       <ComponentPagination
         currentPage={currentPage}
