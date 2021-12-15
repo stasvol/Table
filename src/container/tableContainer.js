@@ -7,20 +7,8 @@ import ComponentPagination from '../components/componentPagination';
 import TableComponent from '../components/tableComponent';
 import { sortData } from '../utils/sort';
 
-const TableContainer = ({ data: { financials }, pages: { pageSize } }) => {
-  const pagesCount = Math.ceil(financials?.length / pageSize);
+const TableContainer = ({ pages: { pageSize }, pagesCount, mappedData }) => {
   const [currentPage, handleClick] = usePagination();
-
-  const mappedData = financials?.map(
-    ({ fiscalDate, accountsPayable, cashChange, cashFlow }, i) => ({
-      order: i + 1,
-      id: Math.ceil(new Date().getTime() * Math.random() * 100),
-      fiscalDate,
-      accountsPayable,
-      cashChange,
-      cashFlow,
-    }),
-  );
 
   const {
     tableData,
@@ -55,7 +43,8 @@ const TableContainer = ({ data: { financials }, pages: { pageSize } }) => {
 };
 
 TableContainer.propTypes = {
-  data: PropTypes.oneOfType([
+  pagesCount: PropTypes.number.isRequired,
+  mappedData: PropTypes.oneOfType([
     PropTypes.shape({
       financials: PropTypes.array,
       fiscalDate: PropTypes.number,

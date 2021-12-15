@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { asyncDataThunk } from '../api/api';
 import DataTable from '../components/data_table';
+import { useTableSelectors } from '../hooks/useTableSelectors';
 
 const App = () => {
   const dispatch = useDispatch();
-  const data = useSelector(({ data }) => data.data);
-  const pages = useSelector(({ pages }) => pages);
+  // const data = useSelector(({ data }) => data.data);
+  // const pages = useSelector(({ pages }) => pages);
+  const { data, pages, pagesCount, mappedData } = useTableSelectors();
 
   useEffect(() => {
     dispatch(asyncDataThunk());
@@ -15,7 +17,14 @@ const App = () => {
 
   return (
     <div className="heading">
-      {data.financials && pages && <DataTable data={data} pages={pages} />}
+      {data.financials && pages && (
+        <DataTable
+          data={data}
+          mappedData={mappedData}
+          pages={pages}
+          pagesCount={pagesCount}
+        />
+      )}
     </div>
   );
 };

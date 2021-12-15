@@ -52,8 +52,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "lint:styles": "stylelint --syntax css src/**/*.css",
     "lint": "eslint --ext .js,.jsx src",
     "lint:fix": "npm run lint -- --fix",
