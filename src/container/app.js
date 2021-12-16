@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { useTableSelectors } from '../hooks/useTableSelectors';
 import { asyncDataThunk } from '../api/api';
 import DataTable from '../components/data_table';
-import { useTableSelectors } from '../hooks/useTableSelectors';
 
 const App = () => {
   const dispatch = useDispatch();
-  // const data = useSelector(({ data }) => data.data);
-  // const pages = useSelector(({ pages }) => pages);
   const { data, pages, pagesCount, mappedData } = useTableSelectors();
 
   useEffect(() => {

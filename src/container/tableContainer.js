@@ -47,7 +47,7 @@ TableContainer.propTypes = {
   mappedData: PropTypes.oneOfType([
     PropTypes.shape({
       financials: PropTypes.array,
-      fiscalDate: PropTypes.number,
+      fiscalDate: PropTypes.string,
       accountsPayable: PropTypes.number,
       cashChange: PropTypes.number,
       cashFlow: PropTypes.number,

@@ -16,7 +16,7 @@ const DataTable = ({ data, pages, pagesCount, mappedData }) => (
 );
 
 DataTable.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.oneOfType([PropTypes.object]).isRequired,
   pages: PropTypes.object.isRequired,
   pagesCount: PropTypes.number.isRequired,
   mappedData: PropTypes.object.isRequired,
