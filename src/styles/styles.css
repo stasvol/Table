@@ -1,0 +1,46 @@
+.heading {
+  text-align: center;
+}
+
+.table {
+  cursor: grab;
+  margin-left: 10%;
+  margin-top: 20px;
+  max-width: 80%;
+}
+
+.pagination {
+  border-radius: 0.25rem;
+  cursor: unset;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+.page-item.disabled .page-link {
+  background-color: #fff;
+  border-color: #dee2e6;
+  color: #6c757d;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.page-item.disabled {
+  cursor: not-allowed;
+}
+
+th {
+  cursor: default;
+}
+
+tbody:nth-child(even) {
+  background: #ecebeb;
+}
+
+tbody:nth-child(odd) {
+  background: #fff;
+}
+
+.tr {
+  background: #d4eefa;
+}
