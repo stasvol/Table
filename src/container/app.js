@@ -7,7 +7,12 @@ import DataTable from '../components/data_table';
 
 const App = () => {
   const dispatch = useDispatch();
-  const { data, pages, pagesCount, mappedData } = useTableSelectors();
+  const {
+    data: { financials },
+    pages,
+    pagesCount,
+    mappedData,
+  } = useTableSelectors();
 
   useEffect(() => {
     dispatch(asyncDataThunk());
@@ -15,9 +20,9 @@ const App = () => {
 
   return (
     <div className="heading">
-      {data.financials && pages && (
+      {financials && pages && (
         <DataTable
-          data={data}
+          data={financials}
           mappedData={mappedData}
           pages={pages}
           pagesCount={pagesCount}

@@ -44,15 +44,18 @@ const TableContainer = ({ pages: { pageSize }, pagesCount, mappedData }) => {
 
 TableContainer.propTypes = {
   pagesCount: PropTypes.number.isRequired,
-  mappedData: PropTypes.oneOfType([
+  mappedData: PropTypes.arrayOf(
     PropTypes.shape({
-      financials: PropTypes.array,
-      fiscalDate: PropTypes.string,
-      accountsPayable: PropTypes.number,
-      cashChange: PropTypes.number,
-      cashFlow: PropTypes.number,
+      financials: PropTypes.arrayOf(
+        PropTypes.shape({
+          fiscalDate: PropTypes.string,
+          accountsPayable: PropTypes.number,
+          cashChange: PropTypes.number,
+          cashFlow: PropTypes.number,
+        }),
+      ),
     }),
-  ]).isRequired,
+  ).isRequired,
 
   pages: PropTypes.shape({
     pageSize: PropTypes.number,

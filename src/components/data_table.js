@@ -16,10 +16,14 @@ const DataTable = ({ data, pages, pagesCount, mappedData }) => (
 );
 
 DataTable.propTypes = {
-  data: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  data: PropTypes.array.isRequired,
   pages: PropTypes.object.isRequired,
-  pagesCount: PropTypes.number.isRequired,
+  pagesCount: PropTypes.number,
   mappedData: PropTypes.object.isRequired,
+};
+
+DataTable.defaultProps = {
+  pagesCount: 0,
 };
 
 export default DataTable;
