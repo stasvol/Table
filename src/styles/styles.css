@@ -10,7 +10,7 @@
 }
 
 .pagination {
-  border-radius: 0.25rem;
+  border-radius: 5px;
   cursor: unset;
   display: flex;
   justify-content: center;
@@ -29,18 +29,14 @@
   cursor: not-allowed;
 }
 
-th {
+.table th {
   cursor: default;
 }
 
-tbody:nth-child(even) {
+.table tbody:nth-child(even) {
   background: #ecebeb;
 }
 
-tbody:nth-child(odd) {
+.table tbody:nth-child(odd) {
   background: #fff;
-}
-
-.tr {
-  background: #d4eefa;
 }

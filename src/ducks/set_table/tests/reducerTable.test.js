@@ -1,4 +1,4 @@
-import { SET_TABLE, setTableSize } from './set_table';
+import { SET_TABLE, setTableSize } from '../set_table';
 
 it('setTableSize', () => {
   const state = {};

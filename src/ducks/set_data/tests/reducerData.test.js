@@ -1,4 +1,4 @@
-import { setDataRedux, SET_DATA } from './set_data';
+import { setDataRedux, SET_DATA } from '../set_data';
 
 describe('testing reducers', () => {
   it('setDataRedux ', () => {

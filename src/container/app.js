@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useTableSelectors } from '../hooks/useTableSelectors';
-import { asyncDataThunk } from '../api/api';
+import { asyncDataThunk } from '../ducks/asyncData';
 import DataTable from '../components/data_table';
 
 const App = () => {

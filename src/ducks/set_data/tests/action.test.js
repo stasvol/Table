@@ -1,4 +1,4 @@
-import { SET_DATA, setDataAC } from './set_data';
+import { SET_DATA, setDataAC } from '../set_data';
 
 describe('actions', () => {
   it('setDataAC', () => {

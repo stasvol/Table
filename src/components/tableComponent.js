@@ -31,7 +31,7 @@ const TableComponent = ({
           return (
             <tbody
               key={i}
-              className={style.active}
+              className={style.tbody}
               draggable
               onDragEnd={dragEndHandler}
               onDragLeave={dragEndHandler}
