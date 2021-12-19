@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
@@ -50,4 +50,4 @@ ComponentPagination.defaultProps = {
   currentPage: 0,
 };
 
-export default ComponentPagination;
+export default memo(ComponentPagination);

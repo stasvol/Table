@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import TableContainer from '../container/tableContainer';
@@ -16,14 +16,17 @@ const DataTable = ({ data, pages, pagesCount, mappedData }) => (
 );
 
 DataTable.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.shape({
+    financials: PropTypes.array,
+  }).isRequired,
   pages: PropTypes.object.isRequired,
   pagesCount: PropTypes.number,
-  mappedData: PropTypes.object.isRequired,
+  mappedData: PropTypes.array,
 };
 
 DataTable.defaultProps = {
   pagesCount: 0,
+  mappedData: [],
 };
 
-export default DataTable;
+export default memo(DataTable);

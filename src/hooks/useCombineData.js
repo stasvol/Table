@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
+
+import { sortData } from '../utils/sort';
 import { usePagination } from './usePagination';
 import { useDragEndDrop } from './useDragEndDrop';
-import { sortData } from '../utils/sort';
 
 export const useCombineData = (mappedData, pageSize) => {
   const [currentPage, handleClick] = usePagination();

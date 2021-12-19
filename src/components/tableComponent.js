@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'reactstrap';
 
@@ -18,7 +18,7 @@ const TableComponent = ({
       <Table bordered hover>
         <thead className={style.head}>
           <tr>
-            <th>#</th>
+            <th className={style.th}>#</th>
             <th>Fiscal Date</th>
             <th>Accounts Payable</th>
             <th>Cash Change</th>
@@ -72,4 +72,4 @@ TableComponent.defaultProps = {
   dropHandler: () => {},
 };
 
-export default TableComponent;
+export default memo(TableComponent);
